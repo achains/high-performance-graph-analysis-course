@@ -25,7 +25,9 @@ def triangle_count(matrix: gb.Matrix):
     three_size_path.assign_scalar(0, mask=three_size_path.diag())
 
     for _ in range(2):
-        three_size_path = matrix.mxm(three_size_path, cast=gb.types.INT64, accum=gb.types.INT64.PLUS)
+        three_size_path = matrix.mxm(
+            three_size_path, cast=gb.types.INT64, accum=gb.types.INT64.PLUS
+        )
 
     three_size_path = three_size_path.diag().reduce_vector()
     three_size_path /= 2
