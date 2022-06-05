@@ -20,8 +20,13 @@ def _mssp(matrix: gb.Matrix, start_node_list: list):
     for i, j in enumerate(start_node_list):
         v.assign_scalar(0, i, j)
 
-    for _ in range(matrix.nrows):
+    is_changed = True
+    i = 0
+    while i < matrix.nrows and is_changed:
+        prev_nnz = v.nvals
         v.min_plus(matrix, out=v, accum=gb.INT64.min)
+        is_changed = prev_nnz == v.nvals
+        i += 1
 
     result = []
     for i, node in enumerate(start_node_list):

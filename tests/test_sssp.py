@@ -13,6 +13,17 @@ def sample_graph():
     )
 
 
+@pytest.fixture
+def pseudo_graph():
+    return gb.Matrix.from_lists(
+        [0, 0, 0, 1, 2, 3, 3], [0, 0, 1, 0, 3, 2, 3], [1, 1, 2, 3, 4, 5, 6]
+    )
+
+
+def test_noedges_sssp(pseudo_graph):
+    assert sssp(pseudo_graph, 0) == [0, 2, -1, -1]
+
+
 @pytest.mark.parametrize(
     "I, J, V, size, start_vertex, expected_ans",
     [
