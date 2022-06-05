@@ -20,8 +20,17 @@ def pseudo_graph():
     )
 
 
-def test_noedges_sssp(pseudo_graph):
+@pytest.fixture()
+def single_node_graph():
+    return gb.Matrix.dense(gb.INT32, 1, 1)
+
+
+def test_pseudo_sssp(pseudo_graph):
     assert sssp(pseudo_graph, 0) == [0, 2, -1, -1]
+
+
+def test_single_node_sssp(single_node_graph):
+    assert sssp(single_node_graph, 0) == [0]
 
 
 @pytest.mark.parametrize(
