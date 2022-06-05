@@ -11,6 +11,26 @@ def sample_graph():
     )
 
 
+@pytest.fixture
+def noedges_graph():
+    return gb.matrix.Matrix.dense(gb.INT32, 5, 5)
+
+
+@pytest.fixture
+def pseudo_graph():
+    return gb.matrix.Matrix.from_lists([0, 0, 1], [0, 1, 1], [1, 1, 1])
+
+
+def test_noedges_bfs(noedges_graph):
+    expected_distances = [-1 for _ in range(noedges_graph.nrows)]
+    expected_distances[0] = 0
+    assert bfs(noedges_graph, 0) == expected_distances
+
+
+def test_pseudo_graph_bfs(pseudo_graph):
+    assert bfs(pseudo_graph, 0) == [0, 1]
+
+
 @pytest.mark.parametrize(
     "start_node, expected_distances",
     [(1, [-1, 0, 1, 2, 1]), (2, [-1, -1, 0, -1, -1]), (0, [0, 1, 2, 2, 1])],
