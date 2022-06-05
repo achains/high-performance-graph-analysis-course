@@ -20,6 +20,9 @@ def triangle_count(matrix: gb.Matrix):
     if not matrix.square:
         raise ValueError("Expected square adjacency matrix")
 
+    if matrix.nrows == 0:
+        return []
+
     three_size_path = matrix
     # Remove loops
     three_size_path.assign_scalar(0, mask=three_size_path.diag())
