@@ -24,12 +24,12 @@ def _bfs(matrix: gb.Matrix, start_node_list):
     level = 1
     is_changed = True
     while level <= matrix.nrows and is_changed:
-        prev_nnz = visited.nonzero()
+        prev_nnz = visited.nvals
         front.mxm(matrix, mask=visited, out=front, desc=gb.descriptor.RC)
         visited.eadd(front, front.type.lxor_monoid, out=visited, desc=gb.descriptor.R)
         distances.assign_scalar(level, mask=front)
         level += 1
-        is_changed = not prev_nnz.iseq(visited.nonzero())
+        is_changed = prev_nnz != visited.nvals
 
     return [(node, list(distances[i].vals)) for i, node in enumerate(start_node_list)]
 
