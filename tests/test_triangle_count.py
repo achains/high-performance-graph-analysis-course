@@ -9,13 +9,13 @@ def sample_graph():
     return gb.Matrix.from_lists(
         [0, 1, 1, 2, 0, 2, 1, 3, 2, 3, 4, 3, 2, 4, 5, 4],
         [1, 0, 2, 1, 2, 0, 3, 1, 3, 2, 3, 4, 4, 2, 4, 5],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [True for _ in range(16)],
     )
 
 
 @pytest.fixture
 def notri_graph():
-    return gb.Matrix.from_lists([0, 1, 1, 2], [1, 0, 2, 1], [1, 1, 1, 1])
+    return gb.Matrix.from_lists([0, 1, 1, 2], [1, 0, 2, 1], [True, True, True, True])
 
 
 @pytest.fixture
@@ -33,7 +33,7 @@ def pseudo_graph():
     return gb.Matrix.from_lists(
         [0, 0, 1, 1, 2, 0, 2, 1, 3, 2, 3, 4, 3, 2, 4, 5, 4],
         [0, 1, 0, 2, 1, 2, 0, 3, 1, 3, 2, 3, 4, 4, 2, 4, 5],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [True for _ in range(17)],
     )
 
 
